@@ -1,4 +1,4 @@
-# DBFM
-*DBFM* расшифровывается как Data Base For Morphs
+# AMO
+*AMO* расшифровывается как Auto Morphs Output
 
 Все
