@@ -2,7 +2,8 @@ import time
 
 from pydantic import BaseModel
 import uvicorn
-import pyautogui as pag
+import keyboard as kb
+import asyncio
 from fastapi import FastAPI
 
 
@@ -13,11 +14,20 @@ class DataModel(BaseModel):
     morph: str
 
 
-@app.post('/morph/get')
-async def add(data: DataModel):
+async def give(data):
     morph = data.morph.split('\n')
     for i in morph:
-        pag.write(f'/{i} \n')
+        kb.press_and_release("'")
+        kb.press_and_release("backspace")
+        await asyncio.sleep(0.5)
+        kb.write(f"{i}", delay=0.03)
+        kb.press_and_release('enter')
+        await asyncio.sleep(0.5)
+
+
+@app.post('/morph/get')
+async def add(data: DataModel):
+    await give(data)
     return {
         'status': 'ok'
     }
